@@ -65,31 +65,29 @@ const Players = ({ players, handleClickOpen }) => {
       </StyledSettingsButtonWrapper>
 
       <List sx={{ maxHeight: 210, overflowY: "scroll" }}>
-        {players.map((player, index) => {
+        {players.map((player) => {
           return (
-            <>
-              <StyledListItemButton sx={{ py: 0.5 }}>
-                <ListItemAvatar sx={{ minWidth: 24 }}>
-                  <Avatar
-                    alt={player.name}
-                    src={player.avatar}
-                    sx={{ width: 24, height: 24 }}
-                  />
-                </ListItemAvatar>
-
-                <ListItemText
-                  primary={player.name}
-                  primaryTypographyProps={{
-                    fontSize: 14,
-                    lineHeight: "22px",
-                    fontWeight: 400,
-                  }}
-                  sx={{ color: "#ffffff", mx: 1 }}
+            <StyledListItemButton sx={{ py: 0.5 }} key={JSON.stringify(player)}>
+              <ListItemAvatar sx={{ minWidth: 24 }}>
+                <Avatar
+                  alt={player.name}
+                  src={player.avatar}
+                  sx={{ width: 24, height: 24 }}
                 />
+              </ListItemAvatar>
 
-                <ThreeDotsButton />
-              </StyledListItemButton>
-            </>
+              <ListItemText
+                primary={player.name}
+                primaryTypographyProps={{
+                  fontSize: 14,
+                  lineHeight: "22px",
+                  fontWeight: 400,
+                }}
+                sx={{ color: "#ffffff", mx: 1 }}
+              />
+
+              <ThreeDotsButton />
+            </StyledListItemButton>
           );
         })}
       </List>

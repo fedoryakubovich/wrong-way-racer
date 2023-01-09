@@ -9,8 +9,6 @@ const ChatContainer = () => {
   const [messages, setMessages] = useState([]);
   const endChatRef = useRef(null);
 
-  console.log({ messages });
-
   useEffect(() => {
     socket.on(SOCKET_EVENTS.newChat, (data) =>
       setMessages((currentMessages) => {

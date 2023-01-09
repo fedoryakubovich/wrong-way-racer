@@ -6,12 +6,15 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
 import { styled } from "@mui/material/styles";
+import Records from "../../modules/Records";
+import Players from "../../modules/Players";
+import Chat from "../../modules/Chat";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <section
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -23,7 +26,7 @@ function TabPanel(props) {
           <Typography>{children}</Typography>
         </Box>
       )}
-    </div>
+    </section>
   );
 }
 
@@ -83,26 +86,44 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+    <Box
+      sx={{
+        width: "100%",
+        background: "#1F1143",
+        boxShadow:
+          "0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 37px #573DC6, inset 0px 4px 30px rgba(255, 255, 255, 0.25)",
+        borderRadius: "24px",
+        maxHeight: 384,
+        paddingBottom: 20,
+      }}
+    >
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+          borderColor: "rgba(255, 255, 255, 0.2)",
+        }}
+      >
         <StyledMuiTabs
           value={value}
           onChange={handleChange}
           allowScrollButtonsMobile
+          sx={{ px: "30px" }}
         >
           <StyledMuiTab label="Records" {...a11yProps(0)} />
           <StyledMuiTab label="Player List" {...a11yProps(1)} />
           <StyledMuiTab label="Chat" {...a11yProps(2)} />
         </StyledMuiTabs>
       </Box>
+
       <TabPanel value={value} index={0}>
-        Item One
+        <Records />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <Players />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <Chat />
       </TabPanel>
     </Box>
   );

@@ -96,8 +96,6 @@ const PlayerCar = forwardRef(({ root = document }, playerCarRef) => {
     }
   };
 
-  console.log({ carStartPosY });
-
   return (
     <Sprite
       ref={playerCarRef}

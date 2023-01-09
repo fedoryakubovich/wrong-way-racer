@@ -1,8 +1,11 @@
 import React from "react";
 import MuiStack from "@mui/material/Stack";
-import CustomInput from "../../../components/CustomInput";
+import useTheme from "@mui/material/styles/useTheme";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
+import CustomInput from "../../../components/CustomInput";
 import { SOCKET_EVENTS } from "../../../utils";
+import SendIcon from "../../../assets/icons/Send.svg";
 import {
   StyledJoinedMessage,
   StyledMessage,
@@ -12,6 +15,9 @@ import {
 } from "./styled";
 
 const ChatContainer = ({ messages, endChatRef }) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
+
   return (
     <MuiStack
       direction={"column"}
@@ -29,7 +35,7 @@ const ChatContainer = ({ messages, endChatRef }) => {
               );
             }
 
-            return <StyledMessage>{data}</StyledMessage>;
+            return <StyledMessage key={id}>{data}</StyledMessage>;
           })}
           <section ref={endChatRef} />
         </StyledChatBody>
@@ -40,10 +46,17 @@ const ChatContainer = ({ messages, endChatRef }) => {
         alignItems="center"
         justifyContent="space-between"
         gap="12px"
+        sx={{
+          [theme.breakpoints.down("md")]: {
+            marginTop: "14px",
+          },
+        }}
       >
         <CustomInput placeholder="..." />
 
-        <StyledSendButton variant="contained">Send</StyledSendButton>
+        <StyledSendButton variant="contained">
+          {matches ? <span>Send</span> : <img src={SendIcon} alt="send icon" />}
+        </StyledSendButton>
       </MuiStack>
     </MuiStack>
   );

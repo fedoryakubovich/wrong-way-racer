@@ -11,6 +11,8 @@ const StyledContent = styled("section")(() => ({
   maxWidth: 1120,
   margin: "0 auto",
   paddingTop: 42,
+  paddingLeft: 12,
+  paddingRight: 12,
 }));
 
 const HORIZONTAL_PADDING = 16;
@@ -24,12 +26,9 @@ const MainLayout = ({ children, gameRef }) => {
     if (window.innerWidth - HORIZONTAL_PADDING * 2 < 1120) {
       const newGameWidth = window.innerWidth - HORIZONTAL_PADDING * 2;
       const newGameHeight = newGameWidth / 1.726;
-      // console.log({ newGameWidth, newGameHeight });
 
       const currentGameWidth = gameRef.current.app.renderer.view.width;
       const currentGameHeight = gameRef.current.app.renderer.view.height;
-
-      console.log({ currentGameWidth, currentGameHeight });
 
       gameRef.current.app.renderer.view.style.width = newGameWidth + "px";
       gameRef.current.app.renderer.view.style.height = newGameHeight + "px";

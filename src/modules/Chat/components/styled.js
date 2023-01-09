@@ -53,7 +53,7 @@ export const StyledChatBodyBorder = styled(MuiBox)(() => ({
   },
 }));
 
-export const StyledSendButton = styled(MuiButton)(() => ({
+export const StyledSendButton = styled(MuiButton)((theme) => ({
   "&.MuiButton-root": {
     background:
       "radial-gradient(47.48% 60% at 50.3% 100%, rgba(255, 255, 255, 0.65) 0%, rgba(178, 89, 248, 0.77) 40.62%, rgba(137, 89, 248, 0.01) 100%), linear-gradient(180deg, #995AFF -7.69%, rgba(108, 58, 252, 0.91) 127.88%)",
@@ -68,5 +68,14 @@ export const StyledSendButton = styled(MuiButton)(() => ({
     height: 40,
     maxWidth: 155,
     textTransform: "capitalize",
+
+    "@media (max-width: 900px)": {
+      minWidth: 32,
+      height: 30,
+      padding: 0,
+      position: "absolute",
+      transform: "translateX(-100%)",
+      right: 10,
+    },
   },
 }));

@@ -7,9 +7,9 @@ import PlayerCar from "./PlayerCar";
 import EnemyCar from "./EnemyCar";
 import RightSide from "./modules/RightSide";
 import LeftSide from "./modules/LeftSide";
+import { useTheme } from "@mui/material/styles";
 import Modal from "./components/Modal";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import CustomInput from "./components/CustomInput";
 import { AppProvider } from "./store";
 import Players from "./modules/Players";
 import MainLayout from "./MainLayout";
@@ -22,6 +22,8 @@ import Chat from "./modules/Chat";
 function App() {
   const playerCarRef = useRef(null);
   const gameRef = useRef(null);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
     <AppProvider>
@@ -41,23 +43,24 @@ function App() {
           </Container>
         </Stage>
 
-        <Grid container spacing={2}>
-          <Grid xs={3.5}>
-            {/* <Tabs /> */}
+        {!matches ? (
+          <Tabs />
+        ) : (
+          <Grid container spacing={2}>
+            <Grid xs={3.5}>
+              <Records />
+            </Grid>
 
-            <Records />
+            <Grid xs={5}>
+              <Chat />
+            </Grid>
+
+            <Grid xs={3.5}>
+              <Players />
+            </Grid>
           </Grid>
+        )}
 
-          <Grid xs={5}>
-            {/* <CustomInput placeholder="..." /> */}
-
-            <Chat />
-          </Grid>
-
-          <Grid xs={3.5}>
-            <Players />
-          </Grid>
-        </Grid>
         <Modal />
       </MainLayout>
     </AppProvider>

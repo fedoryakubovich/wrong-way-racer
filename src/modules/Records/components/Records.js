@@ -24,7 +24,7 @@ const Records = ({ players }) => {
       <List sx={{ maxHeight: 195, overflowY: "scroll" }} disablePadding>
         {players.map((player) => {
           return (
-            <ListItem disablePadding>
+            <ListItem disablePadding key={JSON.stringify(player)}>
               <StyledRecordsAccordion key={`records-${player.rank}`}>
                 <MuiAccordionSummary>
                   <MuiStack
