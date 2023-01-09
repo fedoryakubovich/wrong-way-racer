@@ -1,10 +1,12 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { Sprite, useApp, useTick } from "@pixi/react-pixi";
-import { KEYBOARD_CODES, useKeyboard } from "./utils/hooks";
+import { KEYBOARD_CODES, useKeyboard } from "../../../utils/hooks";
 
-import CarCenterIcon from "./assets/cars/car_center.png";
-import CarLeftIcon from "./assets/cars/car_left.png";
-import CarRightIcon from "./assets/cars/car_right.png";
+import { useAppState } from "../../../store";
+
+import CarCenterIcon from "../../../assets/cars/car_center.png";
+import CarLeftIcon from "../../../assets/cars/car_left.png";
+import CarRightIcon from "../../../assets/cars/car_right.png";
 
 const CAR_POSITIONS = { center: "center", left: "left", right: "right" };
 
@@ -12,14 +14,17 @@ const gameSpeed = 1;
 
 const PlayerCar = forwardRef(({ root = document }, playerCarRef) => {
   const app = useApp();
+  const { state } = useAppState();
+  const { x: Kx, y: Ky } = state.settings.K;
+
   let { current: animateCount } = useRef(0);
   let { current: animateDiff } = useRef(0.05);
-  const carStartPosY = app.renderer.screen.height - 20;
+  const carStartPosY = (app.renderer.screen.height - 20) * Ky;
   const { isKeyPress, removeKey } = useKeyboard({ root });
 
   const [position, setPosition] = useState(CAR_POSITIONS.center);
   const [image, setImage] = useState(CarCenterIcon);
-  const [xPos, setXPos] = useState(app.renderer.screen.width * 0.5);
+  const [xPos, setXPos] = useState(app.renderer.screen.width * 0.5 * Kx);
 
   useTick(() => {
     animate();
@@ -43,7 +48,7 @@ const PlayerCar = forwardRef(({ root = document }, playerCarRef) => {
 
     playerCarRef.current.y =
       animateCount < 100
-        ? playerCarRef.current.y + animateDiff * gameSpeed
+        ? (playerCarRef.current.y + animateDiff * gameSpeed) * Ky
         : carStartPosY;
   };
 
@@ -56,7 +61,9 @@ const PlayerCar = forwardRef(({ root = document }, playerCarRef) => {
           ? CAR_POSITIONS.center
           : CAR_POSITIONS.left;
 
-      setXPos((currentXPos) => currentXPos - app.renderer.screen.width * 0.25);
+      setXPos(
+        (currentXPos) => (currentXPos - app.renderer.screen.width * 0.25) * Kx
+      );
       setPosition(newPosition);
       setTexture(newPosition);
     }
@@ -71,7 +78,9 @@ const PlayerCar = forwardRef(({ root = document }, playerCarRef) => {
           ? CAR_POSITIONS.center
           : CAR_POSITIONS.right;
 
-      setXPos((currentXPos) => currentXPos + app.renderer.screen.width * 0.25);
+      setXPos(
+        (currentXPos) => (currentXPos + app.renderer.screen.width * 0.25) * Kx
+      );
       setPosition(newPosition);
       setTexture(newPosition);
     }

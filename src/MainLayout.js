@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 
 import { styled } from "@mui/material/styles";
+import { APP_ACTIONS, useAppState } from "./store";
 
 const StyledMainLayout = styled("section")(() => ({
   background:
@@ -17,23 +18,31 @@ const StyledContent = styled("section")(() => ({
 
 const HORIZONTAL_PADDING = 16;
 const MainLayout = ({ children, gameRef }) => {
+  const { state, dispatch } = useAppState();
+
+  console.log({ state });
+
   useEffect(() => {
     window.addEventListener("resize", handleChangeWindowSize);
   }, []);
 
   const handleChangeWindowSize = () => {
-    console.log(gameRef.current.app.renderer.view);
     if (window.innerWidth - HORIZONTAL_PADDING * 2 < 1120) {
       const newGameWidth = window.innerWidth - HORIZONTAL_PADDING * 2;
       const newGameHeight = newGameWidth / 1.726;
 
-      const currentGameWidth = gameRef.current.app.renderer.view.width;
-      const currentGameHeight = gameRef.current.app.renderer.view.height;
+      const Kx = Math.min(newGameWidth / 1120, 1);
+      const Ky = Math.min(newGameHeight / 649, 1);
+
+      dispatch({ type: APP_ACTIONS.setK, payload: { x: Kx, y: Ky } });
+
+      gameRef.current.app.stage.scale.x = Kx;
+      gameRef.current.app.stage.scale.y = Ky;
 
       gameRef.current.app.renderer.view.style.width = newGameWidth + "px";
       gameRef.current.app.renderer.view.style.height = newGameHeight + "px";
-      gameRef.current.app.renderer.view.width = newGameWidth * 2;
-      gameRef.current.app.renderer.view.height = newGameHeight * 2;
+      gameRef.current.app.renderer.view.width = newGameWidth;
+      gameRef.current.app.renderer.view.height = newGameHeight;
       gameRef.current.app.renderer.resize(newGameWidth, newGameHeight);
     }
   };

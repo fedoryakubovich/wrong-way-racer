@@ -13,6 +13,8 @@ import { APP_ACTIONS, useAppState } from "../../store";
 const Modal = () => {
   const { state, dispatch } = useAppState();
 
+  console.log({ state });
+
   const handleClose = () => {
     dispatch({ type: APP_ACTIONS.closeModal });
   };

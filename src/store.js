@@ -2,9 +2,9 @@ import React, { createContext, useContext, useReducer } from "react";
 
 const initialState = {
   modal: { isOpen: false },
-  settings: { name: null, speed: 1 },
+  settings: { name: null, speed: 1, K: { x: 1, y: 1 } },
 };
-const appState = createContext(initialState);
+const AppContext = createContext(initialState);
 
 export const APP_ACTIONS = {
   openModal: "OPEN_MODAL",
@@ -12,11 +12,15 @@ export const APP_ACTIONS = {
 
   setName: "SET_NAME",
   setSpeed: "SET_SPEED",
+
+  setK: "SET_K",
 };
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     const newState = JSON.parse(JSON.stringify(state));
+
+    console.log({ action });
 
     switch (action.type) {
       case APP_ACTIONS.openModal:
@@ -31,18 +35,28 @@ const AppProvider = ({ children }) => {
         newState.settings.name = false;
         return newState;
 
+      case APP_ACTIONS.setK:
+        if (action.payload.x) {
+          newState.settings.K.x = action.payload.x;
+        }
+        if (action.payload.Ky) {
+          newState.settings.y = action.payload.y;
+        }
+
+        return newState;
+
       default:
         throw new Error();
     }
   }, initialState);
 
   return (
-    <appState.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch }}>
       {children}
-    </appState.Provider>
+    </AppContext.Provider>
   );
 };
 
-const useAppState = () => useContext(appState);
+const useAppState = () => useContext(AppContext);
 
-export { AppProvider, useAppState };
+export { AppProvider, useAppState, AppContext };
