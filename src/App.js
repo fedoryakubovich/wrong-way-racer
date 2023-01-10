@@ -1,12 +1,4 @@
 import React, { useRef } from "react";
-import { Container, Stage } from "@pixi/react-pixi";
-import Sky from "./Sky";
-import Road from "./Road";
-import MountainFade from "./MountainFade";
-import PlayerCar from "./PlayerCar";
-import EnemyCar from "./EnemyCar";
-import RightSide from "./modules/RightSide";
-import LeftSide from "./modules/LeftSide";
 import { useTheme } from "@mui/material/styles";
 import Modal from "./components/Modal";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
@@ -18,7 +10,7 @@ import { useMediaQuery } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Records from "./modules/Records";
 import Chat from "./modules/Chat";
-import Explosion from "./Explosion";
+import Game from "./modules/Game";
 
 function App() {
   const playerCarRef = useRef(null);
@@ -30,24 +22,7 @@ function App() {
     <AppProvider>
       <CssBaseline />
       <MainLayout gameRef={gameRef}>
-        <Stage
-          // ref={gameRef}
-          width={1120}
-          height={649}
-          options={{ autoDensity: true }}
-        >
-          <Container sortableChildren>
-            <Sky />
-            <MountainFade />
-            <Road />
-            <PlayerCar ref={playerCarRef} />
-            <EnemyCar playerCarRef={playerCarRef} />
-            <RightSide />
-            <LeftSide />
-
-            <Explosion />
-          </Container>
-        </Stage>
+        <Game playerCarRef={playerCarRef} />
 
         {!matches ? (
           <Tabs />

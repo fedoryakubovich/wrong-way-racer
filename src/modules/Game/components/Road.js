@@ -1,6 +1,6 @@
 import { Sprite, useApp } from "@pixi/react-pixi";
 import React from "react";
-import RoadIcon from "./assets/road.png";
+import RoadIcon from "../../../assets/images/road.png";
 
 const Road = () => {
   const app = useApp();

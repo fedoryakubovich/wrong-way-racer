@@ -1,6 +1,6 @@
 import React from "react";
 import { Sprite, useApp } from "@pixi/react-pixi";
-import SkyIcon from "./assets/sky.png";
+import SkyIcon from "../../../assets/images/sky.png";
 
 const Sky = () => {
   const app = useApp();

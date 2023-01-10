@@ -2,20 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Sprite, useApp, useTick } from "@pixi/react-pixi";
 import { v4 as uuidv4 } from "uuid";
 
-import EnemyCenterIcon from "./assets/cars/enemy_center.png";
-import EnemyLeftIcon from "./assets/cars/enemy_left.png";
-import EnemyRightIcon from "./assets/cars/enemy_right.png";
-import { socket, SOCKET_EVENTS } from "./utils";
-
-const gameSpeed = 1;
-
-const ICON_BY_POS = {
-  center: EnemyCenterIcon,
-  left: EnemyLeftIcon,
-  right: EnemyRightIcon,
-};
+import { socket, SOCKET_EVENTS } from "../../../utils";
+import { useAppState } from "../../../store";
+import { ICON_BY_POS } from "../constants";
 
 const EnemyCar = React.memo(({ playerCarRef, pos, id, removeEnemy }) => {
+  const { state } = useAppState();
+  const { speed: gameSpeed } = state.settings;
   const enemyRef = useRef(null);
   const app = useApp();
   const speedDiff = gameSpeed / 500;

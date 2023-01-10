@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import { Container, Sprite, useApp, useTick } from "@pixi/react-pixi";
 
-import MountainRight from "../../assets/mountain_right.png";
-import SideroadRight from "../../assets/sideroad_right.png";
+import MountainRight from "../../../assets/images/mountain_right.png";
+import SideroadRight from "../../../assets/images/sideroad_right.png";
 
 const gameSpeed = 1;
 const INITIAL_SCALE = 0.01;

@@ -1,10 +1,10 @@
 import React, { forwardRef, useRef, useState } from "react";
 import { Sprite, useApp, useTick } from "@pixi/react-pixi";
-import { KEYBOARD_CODES, useKeyboard } from "./utils/hooks";
+import { KEYBOARD_CODES, useKeyboard } from "../../../utils/hooks";
 
-import CarCenterIcon from "./assets/cars/car_center.png";
-import CarLeftIcon from "./assets/cars/car_left.png";
-import CarRightIcon from "./assets/cars/car_right.png";
+import CarCenterIcon from "../../../assets/images/cars/car_center.png";
+import CarLeftIcon from "../../../assets/images/cars/car_left.png";
+import CarRightIcon from "../../../assets/images/cars/car_right.png";
 
 const CAR_POSITIONS = { center: "center", left: "left", right: "right" };
 

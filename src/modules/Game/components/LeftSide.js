@@ -1,15 +1,17 @@
 import React, { useRef } from "react";
 import { Container, Sprite, useApp, useTick } from "@pixi/react-pixi";
 
-import MountainLeft from "../../assets/mountain_left.png";
-import SideroadLeft from "../../assets/sideroad_left.png";
+import MountainLeft from "../../../assets/images/mountain_left.png";
+import SideroadLeft from "../../../assets/images/sideroad_left.png";
+import { useAppState } from "../../../store";
 
-const gameSpeed = 1;
 const INITIAL_SCALE = 0.01;
 const MAX_SCALE = 0.2;
 const CONTAINER_HEIGHT = 300;
 
 const RightSide = ({ destroy }) => {
+  const { state } = useAppState();
+  const { speed: gameSpeed } = state.settings;
   const app = useApp();
   const speedDiff = gameSpeed / CONTAINER_HEIGHT;
   const speed = useRef(speedDiff);

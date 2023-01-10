@@ -1,6 +1,6 @@
 import React from "react";
 import { Sprite, useApp } from "@pixi/react-pixi";
-import MountainFadeIcon from "./assets/mountain_fade.png";
+import MountainFadeIcon from "../../../assets/images/mountain_fade.png";
 
 const MountainFade = () => {
   const app = useApp();

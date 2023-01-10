@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import RightSide from "./RightSide";
-import { generateRandomSeconds } from "../../utils";
+import RightSide from "../components/RightSide";
+import { generateRandomSeconds } from "../../../utils";
 
 const RightSideContainer = () => {
   const [rightSide, setRightSide] = useState(null);

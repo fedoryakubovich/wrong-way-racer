@@ -4,7 +4,7 @@ const initialState = {
   modal: { isOpen: false },
   settings: { name: null, speed: 1 },
 };
-const appState = createContext(initialState);
+const AppContext = createContext(initialState);
 
 export const APP_ACTIONS = {
   openModal: "OPEN_MODAL",
@@ -37,12 +37,12 @@ const AppProvider = ({ children }) => {
   }, initialState);
 
   return (
-    <appState.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch }}>
       {children}
-    </appState.Provider>
+    </AppContext.Provider>
   );
 };
 
-const useAppState = () => useContext(appState);
+const useAppState = () => useContext(AppContext);
 
-export { AppProvider, useAppState };
+export { AppProvider, useAppState, AppContext };
