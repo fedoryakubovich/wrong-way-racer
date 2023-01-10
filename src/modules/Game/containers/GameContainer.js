@@ -17,7 +17,7 @@ const GameContainer = () => {
     }
   }, [state]);
 
-  return <Game playerCarRef={playerCarRef} />;
+  return <Game playerCarRef={playerCarRef} destroyCars={state.game.isEnd} />;
 };
 
 export default GameContainer;

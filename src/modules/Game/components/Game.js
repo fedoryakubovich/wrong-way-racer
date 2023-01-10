@@ -10,14 +10,18 @@ import EnemyCar from "../containers/EnemyCarContainer";
 import RightSide from "../containers/RightSideContainer";
 import LeftSide from "../containers/LeftSideContainer";
 
-const Game = ({ playerCarRef }) => {
+const Game = ({ playerCarRef, destroyCars }) => {
   return (
     <>
       <Sky />
       <MountainFade />
       <Road />
-      <PlayerCar ref={playerCarRef} />
-      <EnemyCar playerCarRef={playerCarRef} />
+      {!destroyCars && (
+        <>
+          <PlayerCar ref={playerCarRef} />
+          <EnemyCar playerCarRef={playerCarRef} />
+        </>
+      )}
       <RightSide />
       <LeftSide />
 

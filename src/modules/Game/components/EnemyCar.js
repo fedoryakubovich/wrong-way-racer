@@ -43,8 +43,8 @@ const EnemyCar = React.memo(({ playerCarRef, pos, id, removeEnemy }) => {
     destroy();
   });
 
-  const handleEndGame = () => {
-    dispatch({ type: APP_ACTIONS.endGame });
+  const handleCrash = () => {
+    dispatch({ type: APP_ACTIONS.crashGame });
   };
 
   const checkEndGame = () => {
@@ -57,7 +57,7 @@ const EnemyCar = React.memo(({ playerCarRef, pos, id, removeEnemy }) => {
       enemyBounds.y < playerBounds.y + playerBounds.height &&
       enemyBounds.y + enemyBounds.height > playerBounds.y
     ) {
-      handleEndGame();
+      handleCrash();
     }
   };
 
