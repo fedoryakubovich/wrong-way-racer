@@ -1,9 +1,7 @@
-import React from "react";
-import { styled } from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
+import MuiSwitch from "@mui/material/Switch";
 
-import Switch from "@mui/material/Switch";
-
-const StyledSwitch = styled(Switch)(() => ({
+const StyledSwitch = styled(MuiSwitch)(() => ({
   "&.MuiSwitch-root": {
     width: 81,
     height: 30,
@@ -85,8 +83,4 @@ const StyledSwitch = styled(Switch)(() => ({
   },
 }));
 
-const CustomSwitch = () => {
-  return <StyledSwitch />;
-};
-
-export default CustomSwitch;
+export default StyledSwitch;

@@ -1,19 +1,7 @@
-import React from "react";
-
-import Slider from "@mui/material/Slider";
-import VerticalNotch from "./VerticalNotch";
+import MuiSlider from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 
-const SliderMark = ({ value }) => {
-  return (
-    <>
-      <VerticalNotch />
-      <div>{value}</div>
-    </>
-  );
-};
-
-const BootstrapSlider = styled(Slider)(() => ({
+export const StyledSlider = styled(MuiSlider)(() => ({
   "&.MuiSlider-root": {
     maxWidth: 286,
   },
@@ -55,38 +43,3 @@ const BootstrapSlider = styled(Slider)(() => ({
     left: "calc(264px / 6)",
   },
 }));
-
-function valuetext(value) {
-  return `${value}`;
-}
-
-const marks = [
-  { value: 1, label: <SliderMark value={1} /> },
-  { value: 2, label: <SliderMark value={2} /> },
-  { value: 3, label: <SliderMark value={3} /> },
-  { value: 4, label: <SliderMark value={4} /> },
-  { value: 5, label: <SliderMark value={5} /> },
-  { value: 6, label: <SliderMark value={6} /> },
-];
-
-export default function ContinuousSlider() {
-  const [value, setValue] = React.useState(3);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    <BootstrapSlider
-      aria-label="Speed"
-      value={value}
-      onChange={handleChange}
-      marks={marks}
-      min={1}
-      max={6}
-      getAriaValueText={valuetext}
-    >
-      <div>ASDASD</div>
-    </BootstrapSlider>
-  );
-}

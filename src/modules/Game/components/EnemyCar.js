@@ -1,13 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Sprite, useApp, useTick } from "@pixi/react-pixi";
-import { v4 as uuidv4 } from "uuid";
 
-import { socket, SOCKET_EVENTS } from "../../../utils";
-import { useAppState } from "../../../store";
+import { APP_ACTIONS, useAppState } from "../../../store";
 import { ICON_BY_POS } from "../constants";
 
 const EnemyCar = React.memo(({ playerCarRef, pos, id, removeEnemy }) => {
-  const { state } = useAppState();
+  const { state, dispatch } = useAppState();
   const { speed: gameSpeed } = state.settings;
   const enemyRef = useRef(null);
   const app = useApp();
@@ -39,9 +37,15 @@ const EnemyCar = React.memo(({ playerCarRef, pos, id, removeEnemy }) => {
     }
 
     speed.current = Math.min(speed.current + speedDiff, gameSpeed);
-    checkEndGame();
+    if (!state.game.isEnd) {
+      checkEndGame();
+    }
     destroy();
   });
+
+  const handleEndGame = () => {
+    dispatch({ type: APP_ACTIONS.endGame });
+  };
 
   const checkEndGame = () => {
     const enemyBounds = enemyRef.current.getBounds();
@@ -53,7 +57,7 @@ const EnemyCar = React.memo(({ playerCarRef, pos, id, removeEnemy }) => {
       enemyBounds.y < playerBounds.y + playerBounds.height &&
       enemyBounds.y + enemyBounds.height > playerBounds.y
     ) {
-      console.log("lost");
+      handleEndGame();
     }
   };
 
@@ -70,48 +74,4 @@ const EnemyCar = React.memo(({ playerCarRef, pos, id, removeEnemy }) => {
   );
 });
 
-const EnemyCarContainer = ({ playerCarRef }) => {
-  const [enemys, setEnemys] = useState({});
-
-  useEffect(() => {
-    socket.on(SOCKET_EVENTS.newEnemy, (data) => {
-      const newId = uuidv4();
-      setEnemys((currentState) => ({
-        ...currentState,
-        [newId]: { pos: data, id: newId },
-      }));
-    });
-
-    return () => {
-      socket.off(SOCKET_EVENTS.newEnemy);
-    };
-  }, []);
-
-  const removeEnemy = useCallback((id) => {
-    setEnemys((currentState) => {
-      delete currentState[id];
-
-      return currentState;
-    });
-  }, []);
-
-  return (
-    <>
-      {Object.keys(enemys).map((key) => {
-        const { pos, id } = enemys[key];
-
-        return (
-          <EnemyCar
-            key={id}
-            playerCarRef={playerCarRef}
-            pos={pos}
-            id={id}
-            removeEnemy={removeEnemy}
-          />
-        );
-      })}
-    </>
-  );
-};
-
-export default EnemyCarContainer;
+export default EnemyCar;

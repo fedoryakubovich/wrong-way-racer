@@ -1,8 +1,7 @@
 import MuiAccordion from "@mui/material/Accordion";
 import MuiBox from "@mui/material/Box";
 import MuiTypography from "@mui/material/Typography";
-
-import { styled } from "@mui/material/styles";
+import styled from "@mui/material/styles/styled";
 
 export const StyledRecordsContainer = styled(MuiBox)(() => ({
   "&.MuiBox-root": {

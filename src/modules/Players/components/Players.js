@@ -1,21 +1,17 @@
 import React from "react";
-
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import List from "@mui/material/List";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-
 import SettingsIcon from "../../../assets/icons/Settings.svg";
-
 import {
   StyledSettingsButton,
   StyledSettingsButtonWrapper,
   StyledListItemButton,
   StyledPlayersWrapper,
 } from "./styled";
-
 import ThreeDotsButton from "./ThreeDotsButton";
 
 const Players = ({ players, handleClickOpen }) => {

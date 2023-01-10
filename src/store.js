@@ -3,6 +3,7 @@ import React, { createContext, useContext, useReducer } from "react";
 const initialState = {
   modal: { isOpen: false },
   settings: { name: null, speed: 1 },
+  game: { isEnd: false },
 };
 const AppContext = createContext(initialState);
 
@@ -12,6 +13,8 @@ export const APP_ACTIONS = {
 
   setName: "SET_NAME",
   setSpeed: "SET_SPEED",
+
+  endGame: "END_GAME",
 };
 
 const AppProvider = ({ children }) => {
@@ -29,6 +32,10 @@ const AppProvider = ({ children }) => {
 
       case APP_ACTIONS.setName:
         newState.settings.name = false;
+        return newState;
+
+      case APP_ACTIONS.endGame:
+        newState.game.isEnd = true;
         return newState;
 
       default:

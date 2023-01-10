@@ -3,7 +3,7 @@ import MuiStack from "@mui/material/Stack";
 import useTheme from "@mui/material/styles/useTheme";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import CustomInput from "../../../components/CustomInput";
+import CustomInput from "../../../components/Input";
 import { SOCKET_EVENTS } from "../../../utils";
 import SendIcon from "../../../assets/icons/Send.svg";
 import {

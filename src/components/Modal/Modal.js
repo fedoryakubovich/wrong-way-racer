@@ -1,11 +1,10 @@
-import * as React from "react";
+import React, { useCallback } from "react";
 
 import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Unstable_Grid2";
-
-import CustomSwitch from "../CustomSwitch";
-import CustomSlider from "../CustomSlider";
-import CustomInput from "../CustomInput";
+import Switch from "../Switch";
+import Slider from "../Slider";
+import CustomInput from "../Input";
 import ModalTitle from "./ModalTitle";
 import StyledModal from "./Modal.styled";
 import { APP_ACTIONS, useAppState } from "../../store";
@@ -13,9 +12,9 @@ import { APP_ACTIONS, useAppState } from "../../store";
 const Modal = () => {
   const { state, dispatch } = useAppState();
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     dispatch({ type: APP_ACTIONS.closeModal });
-  };
+  });
 
   return (
     <StyledModal onClose={handleClose} open={state.modal.isOpen}>
@@ -34,14 +33,14 @@ const Modal = () => {
             <span>Speed Of the Game</span>
           </Grid>
           <Grid xs={7}>
-            <CustomSlider />
+            <Slider />
           </Grid>
 
           <Grid xs={5}>
             <span>Your ID SHow public</span>
           </Grid>
           <Grid xs={7}>
-            <CustomSwitch />
+            <Switch />
           </Grid>
         </Grid>
       </DialogContent>

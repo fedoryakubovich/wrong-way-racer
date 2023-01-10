@@ -1,23 +1,21 @@
-import React, { useState } from "react";
-
+import React, { useCallback, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-
 import { StyledPopover, StyledMenuDivider } from "./styled";
 
 const ThreeDotsButton = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
+  const handleClick = useCallback((event) => {
     setAnchorEl(event.currentTarget);
-  };
+  });
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setAnchorEl(null);
-  };
+  });
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
