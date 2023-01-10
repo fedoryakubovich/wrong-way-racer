@@ -6,7 +6,7 @@ import Switch from "../Switch";
 import Slider from "../Slider";
 import CustomInput from "../Input";
 import ModalTitle from "./ModalTitle";
-import StyledModal from "./Modal.styled";
+import { StyledItemTitle, StyledModal } from "./styled";
 import { APP_ACTIONS, useAppState } from "../../store";
 
 const Modal = () => {
@@ -21,25 +21,34 @@ const Modal = () => {
       <ModalTitle onClose={handleClose} />
 
       <DialogContent>
-        <Grid container alignItems="center" rowSpacing={3}>
-          <Grid xs={5}>
-            <span>Enter Your Name</span>
+        <Grid container alignItems="center" rowSpacing={{ xs: 1, md: 3 }}>
+          <Grid md={5} xs={12}>
+            <StyledItemTitle>Enter Your Name</StyledItemTitle>
           </Grid>
-          <Grid xs={7}>
+          <Grid md={7} xs={12}>
             <CustomInput />
           </Grid>
 
-          <Grid xs={5}>
-            <span>Speed Of the Game</span>
+          <Grid md={5} xs={12}>
+            <StyledItemTitle>Speed Of the Game</StyledItemTitle>
           </Grid>
-          <Grid xs={7}>
+          <Grid md={7} xs={12}>
             <Slider />
           </Grid>
 
-          <Grid xs={5}>
-            <span>Your ID SHow public</span>
+          <Grid md={5} xs={7}>
+            <StyledItemTitle>Your ID SHow public</StyledItemTitle>
           </Grid>
-          <Grid xs={7}>
+          <Grid
+            md={7}
+            xs={5}
+            sx={(theme) => ({
+              [theme.breakpoints.down("md")]: {
+                display: "flex",
+                justifyContent: "end",
+              },
+            })}
+          >
             <Switch />
           </Grid>
         </Grid>
