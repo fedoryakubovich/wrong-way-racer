@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { Container, Stage } from "@pixi/react-pixi";
 import Sky from "./Sky";
 import Road from "./Road";
@@ -18,6 +18,7 @@ import { useMediaQuery } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Records from "./modules/Records";
 import Chat from "./modules/Chat";
+import Explosion from "./Explosion";
 
 function App() {
   const playerCarRef = useRef(null);
@@ -29,7 +30,12 @@ function App() {
     <AppProvider>
       <CssBaseline />
       <MainLayout gameRef={gameRef}>
-        <Stage ref={gameRef} width={1120} height={649}>
+        <Stage
+          // ref={gameRef}
+          width={1120}
+          height={649}
+          options={{ autoDensity: true }}
+        >
           <Container sortableChildren>
             <Sky />
             <MountainFade />
@@ -39,7 +45,7 @@ function App() {
             <RightSide />
             <LeftSide />
 
-            {/* <Explosion /> */}
+            <Explosion />
           </Container>
         </Stage>
 
