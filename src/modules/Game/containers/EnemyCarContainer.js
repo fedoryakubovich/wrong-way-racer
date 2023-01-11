@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import EnemyCar from "../components/EnemyCar";
 import { socket, SOCKET_EVENTS } from "../../../utils";
 
-const EnemyCarContainer = ({ playerCarRef }) => {
+const EnemyCarContainer = ({ playerCarRef, positionRef }) => {
   const [enemys, setEnemys] = useState({});
 
   useEffect(() => {
@@ -45,6 +45,7 @@ const EnemyCarContainer = ({ playerCarRef }) => {
             pos={pos}
             id={id}
             removeEnemy={removeEnemy}
+            positionRef={positionRef}
           />
         );
       })}

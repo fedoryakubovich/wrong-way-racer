@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import Sky from "./Sky";
 import Road from "./Road";
@@ -8,8 +8,11 @@ import Explosion from "./Explosion";
 import EnemyCar from "../containers/EnemyCarContainer";
 import RightSide from "../containers/RightSideContainer";
 import LeftSide from "../containers/LeftSideContainer";
+import { CAR_POSITIONS } from "../../../constants";
 
 const Game = ({ playerCarRef, destroyCars }) => {
+  const positionRef = useRef(CAR_POSITIONS.center);
+
   return (
     <>
       <Sky />
@@ -17,8 +20,8 @@ const Game = ({ playerCarRef, destroyCars }) => {
       <Road />
       {!destroyCars && (
         <>
-          <PlayerCar ref={playerCarRef} />
-          <EnemyCar playerCarRef={playerCarRef} />
+          <PlayerCar ref={playerCarRef} positionRef={positionRef} />
+          <EnemyCar playerCarRef={playerCarRef} positionRef={positionRef} />
         </>
       )}
       <RightSide />

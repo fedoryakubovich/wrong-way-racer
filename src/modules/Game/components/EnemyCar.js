@@ -5,7 +5,7 @@ import { APP_ACTIONS, useAppState } from "../../../store";
 import { ICON_BY_POS } from "../constants";
 
 const EnemyCar = forwardRef(
-  ({ playerCarRef, pos, id, removeEnemy }, enemyRef) => {
+  ({ playerCarRef, pos, id, removeEnemy, positionRef }, enemyRef) => {
     const { state, dispatch } = useAppState();
     const { speed: gameSpeed } = state.settings;
     const app = useApp();
@@ -55,7 +55,8 @@ const EnemyCar = forwardRef(
         enemyBounds.x < playerBounds.x + playerBounds.width &&
         enemyBounds.x + enemyBounds.width > playerBounds.x &&
         enemyBounds.y < playerBounds.y + playerBounds.height &&
-        enemyBounds.y + enemyBounds.height > playerBounds.y
+        enemyBounds.y + enemyBounds.height > playerBounds.y &&
+        positionRef.current === pos
       ) {
         handleCrash();
       }
