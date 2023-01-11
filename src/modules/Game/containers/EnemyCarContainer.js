@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { createRef, useCallback, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import EnemyCar from "../components/EnemyCar";
@@ -20,7 +20,7 @@ const EnemyCarContainer = ({ playerCarRef }) => {
 
     setEnemys((currentState) => ({
       ...currentState,
-      [newId]: { pos: data, id: newId },
+      [newId]: { pos: data, id: newId, ref: createRef() },
     }));
   };
 
@@ -35,10 +35,11 @@ const EnemyCarContainer = ({ playerCarRef }) => {
   return (
     <>
       {Object.keys(enemys).map((key) => {
-        const { pos, id } = enemys[key];
+        const { pos, id, ref } = enemys[key];
 
         return (
           <EnemyCar
+            ref={ref}
             key={id}
             playerCarRef={playerCarRef}
             pos={pos}

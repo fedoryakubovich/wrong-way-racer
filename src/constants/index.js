@@ -8,3 +8,9 @@ export const TABS_LIST = [
   { label: "Player List", component: <Players /> },
   { label: "Chat", component: <Chat /> },
 ];
+
+export const CAR_POSITIONS = {
+  center: "center",
+  left: "left",
+  right: "right",
+};
